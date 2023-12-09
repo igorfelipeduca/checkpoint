@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -24,9 +25,12 @@ export default function Header() {
         </h3>
       </div>
 
-      <div className="py-2 px-4 rounded-lg bg-gradient-to-b from-zinc-black to-zinc-950 text-zinc-300 border border-indigo-700 shadow-sm text-sm transition-all duration-150 hover:bg-gray-950 cursor-pointer hover:ring-1 hover:ring-zinc-500">
+      <Link
+        href={"/signup"}
+        className="py-2 px-4 rounded-lg bg-gradient-to-b from-zinc-black to-zinc-950 text-zinc-300 border border-indigo-700 shadow-sm text-sm transition-all duration-150 hover:bg-gray-950 cursor-pointer hover:ring-1 hover:ring-zinc-500"
+      >
         Create your account
-      </div>
+      </Link>
     </div>
   );
 }
