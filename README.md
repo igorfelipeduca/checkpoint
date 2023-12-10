@@ -4,6 +4,8 @@
 
 ## Checkpoint is an open-source platform that make it possible for you to share your experience with various games. Our main purpose is to unite the community to build an indie project that represents one of our favorite activities: gaming.
 
+### [Open preview](https://checkpoint.duca.dev)
+
 ### How Checkpoint should work?
 
 Checkpoint have some must-have features, here they are:
