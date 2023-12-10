@@ -1,34 +1,32 @@
 "use client";
 
 import { Image } from "@nextui-org/react";
-import { Gamepad2Icon } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { supabase } from "../supabase";
 import { toast } from "sonner";
 import { useState } from "react";
-import { GiPotionBall } from "react-icons/gi";
 import SignupButton from "./components/button";
 import Link from "next/link";
+
+const schema = z
+  .object({
+    name: z.string().min(1, { message: "You must say me your name" }),
+    email: z.string().email({ message: "This email is invalid" }),
+    password: z.string(),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
 
 export default function Signup() {
   const [loading, setLoading] = useState<boolean>(false);
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [failure, setFailure] = useState<boolean>(false);
-
-  const schema = z
-    .object({
-      name: z.string().min(1, { message: "You must say me your name" }),
-      email: z.string().email({ message: "This email is invalid" }),
-      password: z.string(),
-      confirmPassword: z.string(),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-      message: "Passwords don't match",
-      path: ["confirmPassword"],
-    });
 
   const {
     register,
@@ -145,10 +143,17 @@ export default function Signup() {
               </>
             )}
           </div>
+
+          <Link
+            href={"/login"}
+            className="text-indigo-500 text-sm py-4 hover:text-indigo-700"
+          >
+            Already have an account?
+          </Link>
         </form>
 
-        <p className="mt-16 text-sm text-zinc-400">
-          There aren&apos; many terms for this account creation process. We are
+        <p className="mt-16 text-xs text-zinc-400">
+          There aren&apos;t many terms for this account creation process. We are
           an open-source app that only want to make it possible for you to share
           all of your platinum games.
         </p>
