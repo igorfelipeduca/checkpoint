@@ -9,6 +9,7 @@ export default function RecentGames() {
   const [games, setGames] = useState<any>([]);
 
   useEffect(() => {
+<<<<<<< Updated upstream
     axios
       .get(`https://api.rawg.io/api/games`, {
         params: {
@@ -20,6 +21,20 @@ export default function RecentGames() {
       .then((response) => {
         setGames(response.data.results);
       });
+=======
+    if (!loadedGames)
+      axios
+        .get(process.env.RAWG_BASE_URL as string, {
+          params: {
+            page: 1,
+            page_size: 20,
+            key: process.env.RAWG_API_KEY as string,
+          },
+        })
+        .then((response) => {
+          setGames(response.data.results);
+        });
+>>>>>>> Stashed changes
   }, []);
 
   return (
