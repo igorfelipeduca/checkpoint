@@ -6,9 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { supabase } from "../supabase";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import SignupButton from "./components/button";
 import Link from "next/link";
+import { createAvatar } from "@dicebear/core";
+import { botttsNeutral } from "@dicebear/collection";
 
 const schema = z
   .object({
@@ -27,6 +29,12 @@ export default function Signup() {
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [failure, setFailure] = useState<boolean>(false);
+
+  const avatar = useMemo(() => {
+    return createAvatar(botttsNeutral, {
+      size: 128,
+    }).toDataUriSync();
+  }, []);
 
   const {
     register,
@@ -53,9 +61,25 @@ export default function Signup() {
     if (error) {
       toast.error(error.message);
       setFailure(true);
+      setLoading(false);
     }
 
     if (data.user?.email) {
+      const supabaseAvatar = await supabase.storage
+        .from("avatars")
+        .upload(`${formData.email}/${formData.name.split(" ")[0]}`, avatar, {
+          cacheControl: "3600",
+          upsert: true,
+        });
+
+      const newUser = await supabase.from("users").insert({
+        name: formData.name,
+        email: formData.email.split("@")[0],
+        avatar: supabaseAvatar.data?.path,
+      });
+
+      console.log({ newUser });
+
       toast.success(
         "Account created! Please check your email to verify your account."
       );
