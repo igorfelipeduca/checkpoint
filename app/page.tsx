@@ -1,8 +1,11 @@
+"use client";
+
 import Header from "@/components/header";
-import PreviewReview from "@/components/previewReview";
 import RecentGames from "@/components/recentGames";
 import { Image } from "@nextui-org/react";
 import { Gamepad } from "lucide-react";
+import { motion, useAnimation, useScroll } from "framer-motion";
+import { useRef } from "react";
 
 export default function Home() {
   return (
@@ -57,7 +60,7 @@ export default function Home() {
           </div>
 
           <h1 className="text-2xl text-zinc-400 font-semibold">
-            Games everyone is playing
+            Games you might like
           </h1>
         </div>
 
