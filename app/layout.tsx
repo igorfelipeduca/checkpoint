@@ -7,7 +7,26 @@ import { Toaster } from "sonner";
 export const metadata: Metadata = {
   title: "Checkpoint",
   description:
-    "Checkpoint is a web app that will allow you and your friends to share your experiences and checkpoints at video games",
+    "Checkpoint is an open-source platform that make it possible for you to share your experience with various games. Our main purpose is to unite the community to build an indie project that represents one of our favorite activities: gaming.",
+  twitter: {
+    card: "summary_large_image",
+    site: "https://checkpoint.duca.dev",
+    creator: "@ducaswtf",
+    title: "Checkpoint",
+    description:
+      "Checkpoint is an open-source platform that make it possible for you to share your experience with various games.",
+    images: ["/print.png"],
+  },
+  openGraph: {
+    locale: "pt_BR",
+    url: "https://checkpoint.duca.dev",
+    title:
+      "Checkpoint - Checkpoint is an open-source platform that make it possible for you to share your experience with various games.",
+    description:
+      "Checkpoint is an open-source platform that make it possible for you to share your experience with various games.",
+    type: "website",
+    images: ["/print.png"],
+  },
 };
 
 const inter = Inter({ subsets: ["latin"] });
