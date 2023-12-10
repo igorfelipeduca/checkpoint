@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import { supabase } from "../supabase";
+import { toast } from "sonner";
 
 const schema = z.object({
   email: z.string().email({ message: "This email is invalid" }),
@@ -15,6 +17,7 @@ const schema = z.object({
 
 export default function Login() {
   const [loading, setLoading] = useState<boolean>(false);
+  const [failure, setFailure] = useState<boolean>(false);
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
 
   const {
@@ -26,7 +29,31 @@ export default function Login() {
   });
 
   const onSubmit: SubmitHandler<z.infer<typeof schema>> = async (formData) => {
-    console.log(formData);
+    setButtonClicked(true);
+    setLoading(true);
+
+    setTimeout(() => {
+      setButtonClicked(false);
+    }, 300);
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    if (error) {
+      console.error(error);
+      toast.error(error.message);
+      setFailure(true);
+    }
+
+    if (data.user) {
+      toast.success("Welcome back!");
+
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 200);
+    }
   };
 
   return (
@@ -45,7 +72,9 @@ export default function Login() {
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <input
             type="text"
-            className="py-2 px-4 rounded-lg border focus:border-indigo-800 border-zinc-800 ring-0 outline-none bg-zinc-950 text-zinc-300 w-72"
+            className={`py-2 px-4 rounded-lg border focus:border-indigo-800 border-zinc-800 ring-0 bg-zinc-950 text-zinc-300 w-72 outline-none ${
+              failure ? "ring-1 ring-red-500" : ""
+            }`}
             placeholder="Email"
             {...register("email")}
           />
@@ -56,9 +85,11 @@ export default function Login() {
 
           <input
             type="password"
-            className="py-2 px-4 rounded-lg border focus:border-indigo-800 border-zinc-800 ring-0 outline-none bg-zinc-950 text-zinc-300 w-72"
-            placeholder="Password"
+            className={`py-2 px-4 rounded-lg border focus:border-indigo-800 border-zinc-800 ring-0 bg-zinc-950 text-zinc-300 w-72 outline-none ${
+              failure ? "ring-1 ring-red-500" : ""
+            }`}
             {...register("password")}
+            placeholder="Password"
           />
 
           {errors.password && (
@@ -73,7 +104,15 @@ export default function Login() {
             }`}
             type="submit"
           >
-            <Gamepad2Icon /> Login
+            {loading ? (
+              <div className="flex gap-x-2 items-center">
+                <Gamepad2Icon /> Almost there...
+              </div>
+            ) : (
+              <div className="flex gap-x-2 items-center">
+                <Gamepad2Icon /> Login
+              </div>
+            )}
           </button>
         </form>
 

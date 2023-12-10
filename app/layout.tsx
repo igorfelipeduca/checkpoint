@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Checkout",
+  title: "Checkpoint",
   description:
     "Checkpoint is a web app that will allow you and your friends to share your experiences and checkpoints at video games",
 };

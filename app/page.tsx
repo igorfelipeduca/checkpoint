@@ -13,7 +13,7 @@ export default function Home() {
       <Header />
 
       <main className="min-h-screen w-full bg-black">
-        <div className="mt-48 space-y-6">
+        <div className="mt-32 space-y-6">
           <div className="flex justify-center">
             <h1 className="text-5xl font-bold text-zinc-300">
               Tell us about your games

@@ -1,16 +1,14 @@
 "use client";
-
-import { Game } from "@/interfaces/game";
 import { Image } from "@nextui-org/react";
 import axios from "axios";
-import { Gamepad2, StarsIcon, TimerIcon } from "lucide-react";
+import { Gamepad2, PlusIcon, StarsIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
-interface PreviewReviewProps {
+interface SearchPreviewProps {
   game: any;
 }
 
-export default function PreviewReview({ game }: PreviewReviewProps) {
+export default function SearchPreview({ game }: SearchPreviewProps) {
   const [hovering, setHovering] = useState(false);
   const [video, setVideo] = useState<string>("");
   const [videoAvailable, setVideoAvailable] = useState<boolean>(false);
@@ -77,45 +75,51 @@ export default function PreviewReview({ game }: PreviewReviewProps) {
         ))}
       </div>
 
-      <div>
-        {video && !loading ? (
-          <>
-            {hovering ? (
-              <>
-                {videoAvailable ? (
-                  <video
-                    src={video}
-                    className="w-full h-[25.8rem] object-cover mt-4"
-                    autoPlay
-                    style={{ borderRadius: "5%" }}
-                    muted
-                  />
-                ) : (
-                  <Image
-                    src={preview}
-                    alt="baldurs gate"
-                    className="aspect-square mt-8 object-cover w-full h-auto"
-                    isBlurred
-                  />
-                )}
-              </>
-            ) : (
-              <Image
-                src={game.background_image}
-                alt="baldurs gate"
-                className="aspect-square mt-8 object-cover w-full h-auto"
-                isBlurred
-              />
-            )}
-          </>
-        ) : (
-          <Image
-            src={game.background_image}
-            alt="baldurs gate"
-            className="aspect-square mt-8 object-cover w-full h-auto"
-            isBlurred
-          />
-        )}
+      <div className="h-[25.8rem] w-full flex justify-center">
+        <div className="bg-indigo-500/75 opacity-0 hover:opacity-100 transition-all duration-150 ease-soft-spring h-[24rem] w-[24rem] z-50 absolute mt-8 rounded-lg flex justify-center items-center">
+          <Gamepad2 className="h-16 w-16 text-white cursor-pointer" />
+        </div>
+
+        <div className="absolute h-auto w-[24rem]">
+          {video && !loading ? (
+            <>
+              {hovering ? (
+                <>
+                  {videoAvailable ? (
+                    <video
+                      src={video}
+                      className="w-full h-full object-cover mt-4"
+                      autoPlay
+                      style={{ borderRadius: "5%" }}
+                      muted
+                    />
+                  ) : (
+                    <Image
+                      src={preview}
+                      alt="baldurs gate"
+                      className="aspect-square mt-8 object-cover w-full h-full"
+                      isBlurred
+                    />
+                  )}
+                </>
+              ) : (
+                <Image
+                  src={game.background_image}
+                  alt="baldurs gate"
+                  className="aspect-square mt-8 object-cover w-full h-full"
+                  isBlurred
+                />
+              )}
+            </>
+          ) : (
+            <Image
+              src={game.background_image}
+              alt="baldurs gate"
+              className="aspect-square mt-8 object-cover w-full h-auto"
+              isBlurred
+            />
+          )}
+        </div>
       </div>
     </div>
   );
