@@ -5,21 +5,26 @@ import axios from "axios";
 import PreviewReview from "./previewReview";
 import Link from "next/link";
 
-export default function RecentGames() {
+interface RecentGamesProps {
+  loadedGames?: any[];
+}
+
+export default function RecentGames({ loadedGames }: RecentGamesProps) {
   const [games, setGames] = useState<any>([]);
 
   useEffect(() => {
-    axios
-      .get(`https://api.rawg.io/api/games`, {
-        params: {
-          page: 1,
-          page_size: 20,
-          key: "b7d4e1a93a8646978a37871e1a93a9eb",
-        },
-      })
-      .then((response) => {
-        setGames(response.data.results);
-      });
+    if (!loadedGames)
+      axios
+        .get(process.env.RAWG_BASE_URL as string, {
+          params: {
+            page: 1,
+            page_size: 20,
+            key: process.env.RAWG_API_KEY as string,
+          },
+        })
+        .then((response) => {
+          setGames(response.data.results);
+        });
   }, []);
 
   return (
