@@ -16,11 +16,11 @@ export default function RecentGames({ loadedGames }: RecentGamesProps) {
   useEffect(() => {
     if (!loadedGames)
       axios
-        .get(`https://api.rawg.io/api/games`, {
+        .get(process.env.RAWG_BASE_URL as string, {
           params: {
             page: 1,
             page_size: 20,
-            key: "b7d4e1a93a8646978a37871e1a93a9eb",
+            key: process.env.RAWG_API_KEY as string,
           },
         })
         .then((response) => {
