@@ -16,7 +16,6 @@ export default function Create() {
 
     setTimeout(() => {
       setChanged(true);
-      console.log("changed");
     }, 500);
   }, [query]);
 
