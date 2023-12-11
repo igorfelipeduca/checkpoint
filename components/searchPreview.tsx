@@ -10,48 +10,8 @@ interface SearchPreviewProps {
 }
 
 export default function SearchPreview({ game }: SearchPreviewProps) {
-  const [hovering, setHovering] = useState(false);
-  const [video, setVideo] = useState<string>("");
-  const [videoAvailable, setVideoAvailable] = useState<boolean>(false);
-  const [preview, setPreview] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    axios
-      .get(`https://api.rawg.io/api/games/${game.id}/movies`, {
-        params: {
-          key: "b7d4e1a93a8646978a37871e1a93a9eb",
-        },
-      })
-      .then((response) => {
-        if (response.data.results.length) {
-          setVideo(response.data.results[0].data[480]);
-          setPreview(response.data.results[0].preview);
-          setLoading(false);
-        }
-      });
-  }, []);
-
-  useEffect(() => {
-    if (hovering) {
-      setTimeout(() => {
-        setVideoAvailable(true);
-      }, 500);
-    }
-
-    setVideoAvailable(false);
-  }, [hovering]);
-
   return (
-    <div
-      className="p-4 rounded-lg border border-zinc-800 bg-zinc-950"
-      onMouseEnter={() => {
-        setTimeout(() => {
-          setHovering(true);
-        }, 200);
-      }}
-      onMouseLeave={() => setHovering(false)}
-    >
+    <div className="p-4 rounded-lg border border-zinc-800 bg-zinc-950">
       <h1 className="text-2xl text-indigo-400 font-bold">{game.name}</h1>
 
       <div className="my-4 flex items-center gap-x-2">
@@ -82,44 +42,12 @@ export default function SearchPreview({ game }: SearchPreviewProps) {
         </div>
 
         <div className="absolute h-auto w-[24rem]">
-          {video && !loading ? (
-            <>
-              {hovering ? (
-                <>
-                  {videoAvailable ? (
-                    <video
-                      src={video}
-                      className="w-full h-full object-cover mt-4"
-                      autoPlay
-                      style={{ borderRadius: "5%" }}
-                      muted
-                    />
-                  ) : (
-                    <Image
-                      src={preview}
-                      alt="baldurs gate"
-                      className="aspect-square mt-8 object-cover w-full h-full"
-                      isBlurred
-                    />
-                  )}
-                </>
-              ) : (
-                <Image
-                  src={game.background_image}
-                  alt="baldurs gate"
-                  className="aspect-square mt-8 object-cover w-full h-full"
-                  isBlurred
-                />
-              )}
-            </>
-          ) : (
-            <Image
-              src={game.background_image}
-              alt="baldurs gate"
-              className="aspect-square mt-8 object-cover w-full h-auto"
-              isBlurred
-            />
-          )}
+          <Image
+            src={game.background_image}
+            alt="baldurs gate"
+            className="aspect-square mt-8 object-cover w-full h-auto"
+            isBlurred
+          />
         </div>
       </div>
 
