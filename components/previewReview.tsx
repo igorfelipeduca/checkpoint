@@ -1,13 +1,12 @@
 "use client";
 
-import { Game } from "@/interfaces/game";
 import { Image } from "@nextui-org/react";
 import axios from "axios";
 import { Gamepad2, StarsIcon, TimerIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface PreviewReviewProps {
-  game: any;
+  game: Game;
 }
 
 export default function PreviewReview({ game }: PreviewReviewProps) {

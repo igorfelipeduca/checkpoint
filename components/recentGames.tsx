@@ -11,7 +11,7 @@ interface RecentGamesProps {
 }
 
 export default function RecentGames({ loadedGames }: RecentGamesProps) {
-  const [games, setGames] = useState<any>([]);
+  const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
     if (!loadedGames)
@@ -39,7 +39,7 @@ export default function RecentGames({ loadedGames }: RecentGamesProps) {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {games.map((game: any, index: number) => (
             <div key={index} className="masonry-item">
               <PreviewReview game={game} />
