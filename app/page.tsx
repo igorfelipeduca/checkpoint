@@ -15,13 +15,13 @@ export default function Home() {
       <main className="lg:min-h-screen w-full bg-black px-4 lg:px-0">
         <div className="mt-32 space-y-6">
           <div className="flex justify-center">
-            <h1 className="text-3xl lg:text-5xl font-bold text-zinc-300">
+            <h1 className="text-2xl lg:text-5xl font-bold text-zinc-300">
               Tell us about your games
             </h1>
           </div>
 
           <div className="flex justify-center">
-            <h1 className="text-xl lg:text-3xl font-bold text-zinc-400">
+            <h1 className="text-lg lg:text-3xl font-bold text-zinc-400">
               What have you played recently?
             </h1>
           </div>
