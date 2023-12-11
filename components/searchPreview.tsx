@@ -2,7 +2,7 @@
 import { Game } from "@/interfaces/game";
 import { Image } from "@nextui-org/react";
 import axios from "axios";
-import { Gamepad2, PlusIcon, StarsIcon } from "lucide-react";
+import { Gamepad2, StarsIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface SearchPreviewProps {
