@@ -57,7 +57,7 @@ export default function Login() {
   };
 
   return (
-    <div className="h-screen w-screen flex">
+    <div className="h-full lg:h-screen w-screen flex">
       <div className="h-full w-[30rem] bg-zinc-950 px-8 flex flex-col justify-between">
         <div className="flex flex-col">
           <Link href={"/"}>

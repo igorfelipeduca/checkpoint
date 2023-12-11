@@ -90,7 +90,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="h-screen w-screen flex">
+    <div className="h-full lg:h-screen w-screen flex">
       <div className="h-full w-[30rem] bg-zinc-950 px-8 flex flex-col justify-between">
         <Link href={"/"}>
           <h1 className="text-lg font-black text-white uppercase mr-16 pb-16 pt-16">
