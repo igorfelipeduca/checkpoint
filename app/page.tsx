@@ -13,7 +13,7 @@ export default function Home() {
       <Header />
 
       <main className="min-h-screen w-full bg-black">
-        <div className="mt-32 space-y-6">
+        <div className="pt-48 space-y-6">
           <div className="flex justify-center">
             <h1 className="text-5xl font-bold text-zinc-300">
               Tell us about your games
@@ -27,19 +27,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* <div className="p-16">
-          <h3 className="text-lg text-zinc-600 font-semibold tracking-tight">
-            Recent reports
-          </h3>
-
-          <div className="grid grid-cols-2 gap-4 mt-4">
-            <PreviewReview />
-            <PreviewReview />
-            <PreviewReview />
-          </div>
-        </div> */}
-
-        <div className="flex justify-center mt-32">
+        <div className="flex justify-center mt-16">
           <Image
             isBlurred
             src={
