@@ -43,7 +43,7 @@ export default function Create() {
       <Header />
 
       <div className="flex justify-center items-center h-full w-full px-16 transition-all duration-150 ease-soft-spring">
-        <div className="p-px rounded-lg bg-zinc-800 w-ful">
+        <div className="p-px rounded-lg bg-zinc-800 w-ful mt-16">
           <div className="py-4 px-8 rounded-lg w-96 bg-black flex items-center gap-x-4">
             <SearchIcon className="text-zinc-300" />
 
@@ -58,7 +58,7 @@ export default function Create() {
         </div>
       </div>
 
-      <div className="mt-16 px-16">
+      <div className="mt-16 px-4 lg:px-16">
         <RecentGames loadedGames={games} />
       </div>
     </div>

@@ -1,6 +1,9 @@
 export interface Game {
   id: number;
   age_ratings?: number[];
+  suggestions_count: number;
+  rating: number;
+  background_image: string;
   artworks: number[];
   category: number;
   collection?: number;

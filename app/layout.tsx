@@ -43,7 +43,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Toaster />
         <SpeedInsights />
-        {children}
+        <div className="dark">{children}</div>
       </body>
     </html>
   );

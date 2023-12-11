@@ -42,9 +42,9 @@ export default function Login() {
     });
 
     if (error) {
-      console.error(error);
       toast.error(error.message);
       setFailure(true);
+      setLoading(false);
     }
 
     if (data.user) {
@@ -127,7 +127,7 @@ export default function Login() {
       </div>
 
       <Image
-        className="h-full w-full object-cover"
+        className="h-full w-full object-cover rounded-tl-xl rounded-bl-lg rounded-tr-none rounded-br-none md:rounded-xl"
         src="https://i.ibb.co/T4xc4vG/Sharpened.png"
       />
     </div>

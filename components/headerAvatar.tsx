@@ -5,9 +5,15 @@ import { Gamepad, Plus, User } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function HeaderAvatar() {
-  const [hovering, setHovering] = useState<boolean>(false);
+interface HeaderAvatarProps {
+  hovering: boolean;
+  setHovering: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+export default function HeaderAvatar({
+  hovering,
+  setHovering,
+}: HeaderAvatarProps) {
   return (
     <div
       className="flex flex-col items-end"

@@ -1,11 +1,12 @@
 "use client";
+import { Game } from "@/interfaces/game";
 import { Image } from "@nextui-org/react";
 import axios from "axios";
 import { Gamepad2, PlusIcon, StarsIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface SearchPreviewProps {
-  game: any;
+  game: Game;
 }
 
 export default function SearchPreview({ game }: SearchPreviewProps) {
@@ -75,8 +76,8 @@ export default function SearchPreview({ game }: SearchPreviewProps) {
         ))}
       </div>
 
-      <div className="h-[25.8rem] w-full flex justify-center">
-        <div className="bg-indigo-500/75 opacity-0 hover:opacity-100 transition-all duration-150 ease-soft-spring h-[24rem] w-[24rem] z-50 absolute mt-8 rounded-lg flex justify-center items-center">
+      <div className="hidden lg:flex h-[25.8rem] w-full justify-center">
+        <div className="bg-indigo-500/75 opacity-0 hover:opacity-100 transition-all duration-150 ease-soft-spring h-[24rem] :w-[24rem] z-50 absolute mt-8 rounded-lg flex justify-center items-center">
           <Gamepad2 className="h-16 w-16 text-white cursor-pointer" />
         </div>
 
@@ -119,6 +120,21 @@ export default function SearchPreview({ game }: SearchPreviewProps) {
               isBlurred
             />
           )}
+        </div>
+      </div>
+
+      <div className="flex lg:hidden h-[25.8rem] w-full justify-center">
+        <div className="bg-indigo-500/75 opacity-0 hover:opacity-100 transition-all duration-150 ease-soft-spring h-[24rem] :w-[24rem] z-50 absolute mt-8 rounded-lg flex justify-center items-center">
+          <Gamepad2 className="h-16 w-16 text-white cursor-pointer" />
+        </div>
+
+        <div className="absolute h-auto px-8">
+          <Image
+            src={game.background_image}
+            alt={game.name}
+            className="aspect-square mt-8 object-cover w-full h-auto"
+            isBlurred
+          />
         </div>
       </div>
     </div>
