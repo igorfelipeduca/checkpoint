@@ -11,6 +11,7 @@ import HeaderAvatar from "./headerAvatar";
 
 export default function Header() {
   const [user, setUser] = useState<User>();
+  const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
     supabase.auth.getUser().then((supabaseUser) => {
@@ -20,7 +21,7 @@ export default function Header() {
 
   return (
     <div
-      className={`pt-8 pb-4 w-full bg-black text-white px-32 flex justify-between items-top ${inter.className}`}
+      className={`pt-8 pb-4 w-screen bg-black text-white px-32 flex justify-between absolute top-0 items-top ${inter.className}`}
     >
       <Link href={"/"}>
         <h1 className="text-lg font-black text-white uppercase mr-16">
@@ -44,7 +45,7 @@ export default function Header() {
 
       {user ? (
         <div className="flex gap-x-2 items-center">
-          <HeaderAvatar />
+          <HeaderAvatar hovering={hovering} setHovering={setHovering} />
         </div>
       ) : (
         <Link

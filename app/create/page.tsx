@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 export default function Create() {
   const [query, setQuery] = useState<string>("");
   const [changed, setChanged] = useState<boolean>(false);
-  const [games, setGames] = useState<any>([]);
+  const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
     setChanged(false);
@@ -32,8 +32,6 @@ export default function Create() {
         })
         .then((response) => {
           setGames(response.data.results);
-
-          console.log({ data: response.data.results });
         });
     }
   }, [changed]);
