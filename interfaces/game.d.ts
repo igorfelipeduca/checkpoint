@@ -48,6 +48,30 @@ interface ParentPlatform {
 
 interface Genre {
   id: number;
+  age_ratings?: number[];
+  suggestions_count: number;
+  rating: number;
+  background_image: string;
+  artworks: number[];
+  category: number;
+  collection?: number;
+  follows?: number;
+  franchises?: number[] | null;
+  involved_companies?: number[] | null;
+  multiplayer_modes?: number[] | null;
+  player_perspectives?: number[] | null;
+  collections?: number[] | null;
+  hypes?: number;
+  status?: number;
+  ports?: number[] | null;
+  videos?: number[] | null;
+  keywords?: number[] | null;
+  cover: number;
+  created_at: number;
+  external_games?: number[];
+  first_release_date: number;
+  game_modes?: number[];
+  genres: number[];
   name: string;
   slug: string;
   games_count: number;
