@@ -184,13 +184,13 @@ export default function FeedbackDialog({
 
           <div className="flex justify-end">
             <h3 className="text-md text-zinc-500 px-4">
-              You've uploaded {screenshots.length}/4 screenshots
+              You&apos;ve uploaded {screenshots.length}/4 screenshots
             </h3>
           </div>
 
           <div className="flex gap-x-4 items-center p-4">
             {[0, 1, 2, 3, 4].map((_) => (
-              <RatingStar stars={stars} setStars={setStars} index={_} />
+              <RatingStar stars={stars} setStars={setStars} index={_} key={_} />
             ))}
           </div>
 
