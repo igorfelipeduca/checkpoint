@@ -3,17 +3,26 @@
 import Header from "@/components/header";
 import RecentGames from "@/components/recentGames";
 import { Image } from "@nextui-org/react";
+import { User } from "@supabase/supabase-js";
 import { Gamepad } from "lucide-react";
-import { motion, useAnimation, useScroll } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "./supabase";
 
 export default function Home() {
+  const [user, setUser] = useState<User>();
+
+  useEffect(() => {
+    supabase.auth.getUser().then((supabaseUser) => {
+      if (supabaseUser.data.user) setUser(supabaseUser.data.user);
+    });
+  }, []);
+
   return (
     <div className="bg-black">
       <Header />
 
       <main className="lg:min-h-screen w-full bg-black px-4 lg:px-0">
-        <div className="mt-32 space-y-6">
+        <div className={`pt-32 space-y-6 ${user ? "lg:pt-40" : ""}`}>
           <div className="flex justify-center">
             <h1 className="text-2xl lg:text-5xl font-bold text-zinc-300">
               Tell us about your games

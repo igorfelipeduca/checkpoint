@@ -1,7 +1,8 @@
 "use client";
 
+import { supabase } from "@/app/supabase";
 import { Image } from "@nextui-org/react";
-import { Gamepad, Plus, User } from "lucide-react";
+import { Gamepad, Plus, Unlink, User } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -14,9 +15,13 @@ export default function HeaderAvatar({
   hovering,
   setHovering,
 }: HeaderAvatarProps) {
+  const logout = () => {
+    supabase.auth.signOut().then(() => window.location.reload());
+  };
+
   return (
     <div
-      className="flex flex-col items-end w-48 h-[7rem]"
+      className={`flex flex-col items-end w-10 h-[7rem]`}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
@@ -47,10 +52,17 @@ export default function HeaderAvatar({
 
             <Link
               href={"/create"}
-              className="bg-indigo-700 py-2 px-4 rounded-lg w-full border border-indigo-800 text-white flex items-center gap-x-2 transition-all duration-150 cursor-pointer text-sm hover:bg-indigo-800"
+              className="bg-indigo-700 py-2 px-4 rounded-lg w-full border border-indigo-800 text-white flex justify-center items-center gap-x-2 transition-all duration-150 cursor-pointer text-sm hover:bg-indigo-800"
             >
               <Plus className="h-5 w-5" /> Something new?
             </Link>
+
+            <div
+              onClick={logout}
+              className="bg-red-700 py-2 px-4 rounded-lg w-full border border-red-800 text-white flex items-center gap-x-2 transition-all duration-150 cursor-pointer text-sm hover:bg-red-800 justify-center"
+            >
+              <Unlink className="h-5 w-5" /> Leave
+            </div>
           </div>
         </div>
       </div>

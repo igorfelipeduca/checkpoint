@@ -23,10 +23,10 @@ export default function Header() {
   return (
     <>
       <div
-        className={`hidden lg:flex pt-8 pb-4 w-screen bg-black text-white px-32 justify-between absolute top-0 items-top ${inter.className}`}
+        className={`hidden lg:flex pt-8 pb-4 w-screen bg-black text-white px-16 justify-between absolute top-0 items-top ${inter.className}`}
       >
         <Link href={"/"}>
-          <h1 className="text-lg font-black text-white uppercase mr-16">
+          <h1 className="text-lg font-black text-white uppercase -mt-1">
             Checkpoint
           </h1>
         </Link>
@@ -36,13 +36,12 @@ export default function Header() {
             Games
           </h3>
 
-          <h3 className="text-md text-zinc-400 transition-all duration-150 hover:text-indigo-600 ease-linear cursor-pointer">
-            How does this work?
-          </h3>
-
-          <h3 className="text-md text-zinc-400 transition-all duration-150 hover:text-indigo-600 ease-linear cursor-pointer">
-            Scoreboard
-          </h3>
+          <Link
+            href={"/timeline"}
+            className="text-md text-zinc-400 transition-all duration-150 hover:text-indigo-600 ease-linear cursor-pointer"
+          >
+            Timeline
+          </Link>
         </div>
 
         {user ? (

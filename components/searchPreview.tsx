@@ -4,9 +4,13 @@ import { Gamepad2, StarsIcon } from "lucide-react";
 
 interface SearchPreviewProps {
   game: Game;
+  setSelectedGame: React.Dispatch<React.SetStateAction<Game | undefined>>;
 }
 
-export default function SearchPreview({ game }: SearchPreviewProps) {
+export default function SearchPreview({
+  game,
+  setSelectedGame,
+}: SearchPreviewProps) {
   return (
     <div className="p-4 rounded-lg border border-zinc-800 bg-zinc-950">
       <h1 className="text-2xl text-indigo-400 font-bold">{game.name}</h1>
@@ -34,26 +38,14 @@ export default function SearchPreview({ game }: SearchPreviewProps) {
       </div>
 
       <div className="hidden lg:flex h-[25.8rem] w-full justify-center">
-        <div className="bg-indigo-500/75 opacity-0 hover:opacity-100 transition-all duration-150 ease-soft-spring h-[24rem] :w-[24rem] z-50 absolute mt-8 rounded-lg flex justify-center items-center">
+        <div
+          className="bg-indigo-500/75 opacity-0 hover:opacity-100 transition-all duration-150 ease-soft-spring h-[24rem] w-[24rem] z-50 absolute mt-8 rounded-lg flex justify-center items-center"
+          onClick={() => setSelectedGame(game)}
+        >
           <Gamepad2 className="h-16 w-16 text-white cursor-pointer" />
         </div>
 
         <div className="absolute h-auto w-[24rem]">
-          <Image
-            src={game.background_image}
-            alt="baldurs gate"
-            className="aspect-square mt-8 object-cover w-full h-auto"
-            isBlurred
-          />
-        </div>
-      </div>
-
-      <div className="flex lg:hidden h-[25.8rem] w-full justify-center">
-        <div className="bg-indigo-500/75 opacity-0 hover:opacity-100 transition-all duration-150 ease-soft-spring h-[24rem] :w-[24rem] z-50 absolute mt-8 rounded-lg flex justify-center items-center">
-          <Gamepad2 className="h-16 w-16 text-white cursor-pointer" />
-        </div>
-
-        <div className="absolute h-auto px-8">
           <Image
             src={game.background_image}
             alt={game.name}
@@ -61,6 +53,16 @@ export default function SearchPreview({ game }: SearchPreviewProps) {
             isBlurred
           />
         </div>
+      </div>
+
+      <div className="flex lg:hidden h-[25.8rem] w-full justify-center">
+        <Image
+          src={game.background_image}
+          alt={game.name}
+          className="aspect-square mt-8 object-cover w-full h-auto"
+          isBlurred
+          onClick={() => setSelectedGame(game)}
+        />
       </div>
     </div>
   );

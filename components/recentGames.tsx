@@ -4,51 +4,42 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import PreviewReview from "./previewReview";
 import Link from "next/link";
-import SearchPreview from "./searchPreview";
+import { supabase } from "@/app/supabase";
+import { User } from "@supabase/supabase-js";
 
-interface RecentGamesProps {
-  loadedGames?: any[];
-}
-
-export default function RecentGames({ loadedGames }: RecentGamesProps) {
+export default function RecentGames() {
   const [games, setGames] = useState<Game[]>([]);
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    if (!loadedGames)
-      axios
-        .get(process.env.RAWG_BASE_URL as string, {
-          params: {
-            page: 1,
-            page_size: 20,
-            key: process.env.RAWG_API_KEY as string,
-          },
-        })
-        .then((response) => {
-          setGames(response.data.results);
-        });
+    supabase.auth.getUser().then((supabaseUser) => {
+      if (supabaseUser.data.user) setUser(supabaseUser.data.user);
+    });
+
+    axios
+      .get(process.env.RAWG_BASE_URL as string, {
+        params: {
+          page: 1,
+          page_size: 20,
+          key: process.env.RAWG_API_KEY as string,
+        },
+      })
+      .then((response) => {
+        setGames(response.data.results);
+      });
   }, []);
 
   return (
     <div>
-      {loadedGames ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {loadedGames.map((game: any, index: number) => (
-            <div key={index} className="masonry-item">
-              <SearchPreview game={game} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {games.map((game: any, index: number) => (
-            <div key={index} className="masonry-item">
-              <PreviewReview game={game} />
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {games.map((game: any, index: number) => (
+          <div key={index} className="masonry-item">
+            <PreviewReview game={game} />
+          </div>
+        ))}
+      </div>
 
-      {loadedGames ? (
+      {user ? (
         <></>
       ) : (
         <div className="p-8 text-zinc-300">
