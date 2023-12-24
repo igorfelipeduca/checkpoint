@@ -55,8 +55,8 @@ export default function TimelineCard({ review }: TimelineCardProps) {
             {review?.review}
           </h1>
 
-          <h3 className="text-md text-zinc-500">
-            -- {user?.name} sobre{" "}
+          <h3 className="text-md text-zinc-500 flex items-center gap-x-1">
+            <span className="text-zinc-300 font-bold">{user?.name} </span> sobre{" "}
             <span className="font-bold text-zinc-300">{game?.name}</span>
           </h3>
 
@@ -73,7 +73,7 @@ export default function TimelineCard({ review }: TimelineCardProps) {
 
       <Image
         alt="game"
-        className="w-full h-auto aspect-video rounded-xl mt-8"
+        className="w-[80rem] h-auto aspect-video rounded-xl mt-8"
         src={
           review.screenshots?.length
             ? review.screenshots[

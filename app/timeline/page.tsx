@@ -14,6 +14,8 @@ export default function Timeline() {
       .from("reviews")
       .select("*")
       .then(({ data }) => {
+        console.log({ data });
+
         if (data?.length) {
           data.map((review) => {
             supabase
@@ -48,10 +50,12 @@ export default function Timeline() {
     <div className="min-h-screen bg-black">
       <Header />
 
-      <div className="py-48 px-16 flex flex-col space-y-16">
-        {reviews.map((review, index) => (
-          <TimelineCard review={review} key={index} />
-        ))}
+      <div className="flex jusitfy-between">
+        <div className="py-48 px-16 flex flex-col space-y-16">
+          {reviews.map((review, index) => (
+            <TimelineCard review={review} key={index} />
+          ))}
+        </div>
       </div>
     </div>
   );
