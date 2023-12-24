@@ -102,6 +102,8 @@ interface Game {
   id: number;
   slug: string;
   name: string;
+  description: string;
+  description_raw: string;
   released: string;
   tba: boolean;
   background_image: string;

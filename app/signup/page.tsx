@@ -53,6 +53,18 @@ export default function Signup() {
       setButtonClicked(false);
     }, 300);
 
+    const { data: existentAccount } = await supabase
+      .from("user")
+      .select("*")
+      .eq("email", formData.email);
+
+    if (existentAccount && existentAccount.length) {
+      toast.error("This email is already in use");
+      setFailure(true);
+      setLoading(false);
+      return;
+    }
+
     const { data, error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
@@ -74,14 +86,14 @@ export default function Signup() {
 
       const newUser = await supabase.from("users").insert({
         name: formData.name,
-        email: formData.email.split("@")[0],
+        email: formData.email,
         avatar: supabaseAvatar.data?.path,
       });
 
       console.log({ newUser });
 
       toast.success(
-        "Account created! Please check your email to verify your account."
+        "Account created! Please check your email to verify your account.",
       );
 
       setLoading(false);

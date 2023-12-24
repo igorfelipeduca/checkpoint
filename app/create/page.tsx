@@ -8,9 +8,11 @@ import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 import { User } from "@supabase/supabase-js";
 import ReviewDialog from "@/components/reviewDialog";
+import { CheckpointUser } from "@/interfaces/user";
 
 export default function Create() {
   const [user, setUser] = useState<User>();
+  const [checkpointUser, setCheckpointUser] = useState<CheckpointUser>();
   const [query, setQuery] = useState<string>("");
   const [changed, setChanged] = useState<boolean>(false);
   const [games, setGames] = useState<Game[]>([]);
@@ -18,10 +20,19 @@ export default function Create() {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    supabase.auth.getUser().then((supabaseUser) => {
+    supabase.auth.getUser().then((supabaseUser: any) => {
       if (!supabaseUser.data.user) window.location.href = "/login";
 
       setUser(supabaseUser.data.user as User);
+
+      supabase
+        .from("user")
+        .select("*")
+        .eq("email", supabaseUser?.data?.user?.email)
+        .then((foundUser) => {
+          if (foundUser.data && foundUser.data.length)
+            setCheckpointUser(foundUser.data[0]);
+        });
     });
   }, []);
 
@@ -80,7 +91,7 @@ export default function Create() {
           setOpen={setDialogOpen}
           selectedGame={selectedGame}
           setSelectedGame={setSelectedGame}
-          user={user}
+          user={checkpointUser}
         />
 
         <SearchGames loadedGames={games} setSelectedGame={setSelectedGame} />
