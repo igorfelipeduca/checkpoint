@@ -9,18 +9,21 @@ import { SubmitHandler, set, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { supabase } from "@/app/supabase";
-import { User } from "@supabase/supabase-js";
+import { CheckpointUser } from "@/interfaces/user";
 
 interface FeedbackDialogProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   selectedGame: Game | undefined;
   setSelectedGame: React.Dispatch<React.SetStateAction<Game | undefined>>;
-  user: User | undefined;
+  user: CheckpointUser | undefined;
 }
 
 const schema = z.object({
-  review: z.string().min(1, { message: "You must write a review" }),
+  review: z
+    .string()
+    .min(1, { message: "You must write a title to your review" }),
+  text: z.string().min(1, { message: "You must write a text to your review" }),
 });
 
 export default function FeedbackDialog({
@@ -90,10 +93,10 @@ export default function FeedbackDialog({
       const { data, error } = await supabase.storage
         .from("screenshots")
         .upload(
-          `${user?.email?.split("@")[0]}-${
-            selectedGame?.id
-          }/${screenshotsFiles.indexOf(image)}`,
-          image
+          `${user?.email?.split(
+            "@",
+          )[0]}-${selectedGame?.id}/${screenshotsFiles.indexOf(image)}`,
+          image,
         );
 
       if (error) {
@@ -113,6 +116,7 @@ export default function FeedbackDialog({
       .insert({
         stars,
         review: formData.review,
+        text: formData.text,
         screenshots: JSON.stringify(uploadedScreenshots),
         user: user?.id,
         game_id: selectedGame?.id,
@@ -128,6 +132,7 @@ export default function FeedbackDialog({
       toast.success("Review submitted!");
       setLoading(false);
       setOpen(false);
+      window.location.href = `/review/${data[0].id}`;
     }
   };
 
@@ -200,7 +205,7 @@ export default function FeedbackDialog({
                 className={`w-full bg-zinc-900 rounded-xl border border-zinc-700 text-zinc-300 outline-none p-4 text-md placeholder:text-zinc-500 min-h-[10rem] ${
                   errors?.review ? "border-red-700" : ""
                 }`}
-                placeholder="Just write what you think about this game..."
+                placeholder="A title for your review"
                 {...register("review")}
               />
             </div>
@@ -209,6 +214,24 @@ export default function FeedbackDialog({
               {errors.review && (
                 <p className="text-sm text-red-600 mt-1">
                   {errors.review.message}
+                </p>
+              )}
+            </div>
+
+            <div className="p-4">
+              <textarea
+                className={`w-full bg-zinc-900 rounded-xl border border-zinc-700 text-zinc-300 outline-none p-4 text-md placeholder:text-zinc-500 min-h-[10rem] ${
+                  errors?.text ? "border-red-700" : ""
+                }`}
+                placeholder="Write your review"
+                {...register("text")}
+              />
+            </div>
+
+            <div className="px-4">
+              {errors.text && (
+                <p className="text-sm text-red-600 mt-1">
+                  {errors.text.message}
                 </p>
               )}
             </div>

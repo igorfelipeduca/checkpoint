@@ -18,9 +18,9 @@ export default function PreviewReview({ game }: PreviewReviewProps) {
 
   useEffect(() => {
     axios
-      .get(`https://api.rawg.io/api/games/${game.id}/movies`, {
+      .get(`${process.env.RAWG_BASE_URL}/games/${game.id}/movies`, {
         params: {
-          key: "b7d4e1a93a8646978a37871e1a93a9eb",
+          key: process.env.RAWG_API_KEY,
         },
       })
       .then((response) => {
