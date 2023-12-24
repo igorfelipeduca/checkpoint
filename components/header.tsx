@@ -23,15 +23,15 @@ export default function Header() {
   return (
     <>
       <div
-        className={`hidden lg:flex pt-8 pb-4 w-screen bg-black text-white px-16 justify-between absolute top-0 items-top ${inter.className}`}
+        className={`hidden lg:flex pt-8 pb-4 w-screen bg-black text-white px-16 justify-between absolute top-0 items-center ${inter.className}`}
       >
         <Link href={"/"}>
-          <h1 className="text-lg font-black text-white uppercase -mt-1">
+          <h1 className="text-lg font-black text-white uppercase">
             Checkpoint
           </h1>
         </Link>
 
-        <div className="flex gap-x-8">
+        <div className={`flex gap-x-8 ml-32`}>
           <h3 className="text-md text-zinc-400 transition-all duration-150 hover:text-indigo-600 ease-linear cursor-pointer">
             Games
           </h3>
@@ -45,8 +45,24 @@ export default function Header() {
         </div>
 
         {user ? (
-          <div className="flex gap-x-2 items-center">
-            <HeaderAvatar hovering={hovering} setHovering={setHovering} />
+          <div className="flex gap-x-2 items-center justify-center text-center">
+            <Link
+              href={"/create"}
+              className={
+                "bg-black hover:bg-zinc-800 transition-all duration-150 ease-linear rounded-xl border border-zinc-800 text-zinc-300 py-2 px-4"
+              }
+            >
+              Create a new review
+            </Link>
+
+            <Link href={"/profile"}>
+              <Image
+                isBlurred
+                alt="profile image"
+                src={"https://t2.tudocdn.net/315004?w=824&h=494"}
+                className="h-10 w-10 rounded-lg object-cover"
+              />
+            </Link>
           </div>
         ) : (
           <Link
@@ -66,20 +82,6 @@ export default function Header() {
             Checkpoint
           </h1>
         </Link>
-
-        {/* <div className="flex gap-x-8">
-          <h3 className="text-md text-zinc-400 transition-all duration-150 hover:text-indigo-600 ease-linear cursor-pointer">
-            Games
-          </h3>
-
-          <h3 className="text-md text-zinc-400 transition-all duration-150 hover:text-indigo-600 ease-linear cursor-pointer">
-            How does this work?
-          </h3>
-
-          <h3 className="text-md text-zinc-400 transition-all duration-150 hover:text-indigo-600 ease-linear cursor-pointer">
-            Scoreboard
-          </h3>
-        </div> */}
 
         {user ? (
           <SheetAvatar />

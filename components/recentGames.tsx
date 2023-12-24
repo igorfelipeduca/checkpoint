@@ -31,7 +31,7 @@ export default function RecentGames() {
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {games.map((game: any, index: number) => (
           <div key={index} className="masonry-item">
             <PreviewReview game={game} />

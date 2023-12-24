@@ -36,14 +36,14 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hidden lg:flex justify-center mt-32">
+        <div className="hidden lg:flex justify-center mt-32 px-16">
           <Image
             isBlurred
             src={
               "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             }
             alt="A game controller"
-            className="aspect-video object-cover w-[100rem] rounded-xl ring-4 ring-zinc-800"
+            className="aspect-video object-cover w-full rounded-xl ring-4 ring-zinc-800"
             height={1080}
             width={1920}
           />
@@ -56,14 +56,14 @@ export default function Home() {
               "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             }
             alt="A game controller"
-            className="aspect-square object-cover w-[100rem] rounded-xl ring-4 ring-zinc-800"
+            className="aspect-square object-cover w-full rounded-xl ring-4 ring-zinc-800"
             height={1080}
             width={1920}
           />
         </div>
       </main>
 
-      <div className="py-4 px-4 mt-16 lg:mt-0">
+      <div className="py-4 px-4 pt-16 lg:mt-0">
         <div className="flex gap-x-2 items-center">
           <div className="p-1 rounded-lg bg-gradient-to-b from-zinc-950 to-indigo-950 border-2 border-zinc-800">
             <Gamepad className="text-indigo-300 h-8 w-8" />
@@ -74,9 +74,7 @@ export default function Home() {
           </h1>
         </div>
 
-        <div className="mt-16">
-          <RecentGames />
-        </div>
+        <RecentGames />
       </div>
     </div>
   );
