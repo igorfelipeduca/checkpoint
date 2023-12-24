@@ -136,11 +136,12 @@ export default function Review(props: ReviewProps) {
 
         <div className="grid grid-cols-2 gap-x-4 mt-16">
           {screenshots?.length &&
-            screenshots?.map((screenshot) => (
+            screenshots?.map((screenshot, index) => (
               <Image
                 src={screenshot}
                 alt={screenshot}
                 className="object-cover rounded-xl"
+                key={index}
                 isBlurred
               />
             ))}
